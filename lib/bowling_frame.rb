@@ -9,6 +9,18 @@ attr_reader   :first_roll_pins_knocked_down, :second_roll_pins_knocked_down, :to
         @next_frame = next_frame
         
     end 
+    def set_next_frame(frame)
+      @next_frame = frame 
+    end 
+
+    def get_bonus_roll_count
+      if @first_roll_pins_knocked_down == 10 
+        return 2
+      elsif @total_pins_knocked_down == 10
+        return 1
+      end 
+      0
+    end
 
     def get_bonus_roll_count
       if @first_roll_pins_knocked_down == 10 
