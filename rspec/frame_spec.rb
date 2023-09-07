@@ -1,52 +1,30 @@
 
 require 'rspec'
-require 'frame'
+require 'bowling_frame'
 
-RSpec.describe "strike? method" do 
-    it "return true if strike" do 
-        frame = Frame.new([1,2])
-        result = frame.strike? 
-        expect(result).to be(false)
+RSpec.describe "#initialize method" do 
+    it "get correct initialized parameters when getters are called" do 
+        frame = BowlingFrame.new(3,5)
+        expect(frame.first_roll_pins_knocked_down).to be(3)
+        expect(frame.second_roll_pins_knocked_down).to be(5)
+        expect(frame.total_pins_knocked_down).to be(8)
     end 
 end
 
-RSpec.describe "strike? method" do 
-    it "return false if not strike" do 
-        frame = Frame.new([8,2])
-        result = frame.strike? 
-        expect(result).to be(false)
+RSpec.describe "#initialize method" do 
+    it "set second_roll_pins_knocked_down to 0 by default when no argument is passed" do 
+        frame = BowlingFrame.new(10)
+        expect(frame.first_roll_pins_knocked_down).to be(10)
+        expect(frame.second_roll_pins_knocked_down).to be(0)
+        expect(frame.total_pins_knocked_down).to be(10)
     end 
 end
 
-RSpec.describe "strike? method" do 
-    it "return false if not strike" do 
-        frame = Frame.new([10])
-        result = frame.strike? 
-        expect(result).to be(true)
-    end 
-end
-
-
-RSpec.describe "spare? method" do 
-    it "return false if not spare" do 
-        frame = Frame.new([10])
-        result = frame.spare? 
-        expect(result).to be(false)
-    end 
-end
-
-RSpec.describe "spare? method" do 
-    it "return true if spare" do 
-        frame = Frame.new([2,8])
-        result = frame.spare? 
-        expect(result).to be(true)
-    end 
-end
-
-RSpec.describe "spare? method" do 
-    it "return false if not spare" do 
-        frame = Frame.new([2,4])
-        result = frame.spare? 
-        expect(result).to be(false)
+RSpec.describe "#initialize method" do 
+    it "raises an error when the first_roll_pins_knocked_down is not 10 and the second argument is not provided" do 
+     
+        expect { BowlingFrame.new(6)
+        }.to raise_error(ArgumentError, "Invalid number of pins knocked down")
+         
     end 
 end
