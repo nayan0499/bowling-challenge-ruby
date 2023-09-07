@@ -2,18 +2,18 @@
 require 'frame'
 
 
-
 class ScoreCalculator
     def initialize(scores)
         @scores = scores
         @frames = []
     end 
-    
+
+    #TODO: Where should this be? 
     def create_frames
         index = 0
       
         while index < @scores.length
-            rolls_to_include = rolls_to_include_in_frame(frames.length, index)
+          rolls_to_include = rolls_to_include_in_frame(frames.length, index)
       
           frame_scores = @scores[index, rolls_to_include]
           frame = Frame.new(frame_scores)
@@ -45,13 +45,15 @@ class ScoreCalculator
       total_score  = 0 
       while index < @frames.length
         current_frame = @frames[index]
-        total_score += get_score_for_frame(index,current_frame )
+        total_score += get_score_for_frame(index)
         index +=1 
       end
       total_score 
     end 
 
-    def get_score_for_frame(index, frame)
+    # TODO: Where should this be? 
+    def get_score_for_frame(index)
+      frame = @frames[index]
       if frame.strike?
         if index == 8
           bonus_score = @frames[index+1].scores[0] +@frames[index+1].scores[1]

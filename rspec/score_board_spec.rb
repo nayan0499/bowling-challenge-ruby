@@ -200,7 +200,7 @@ RSpec.describe "calculate total of 1 frame" do
   it "calculate total of one frame" do 
     score_calculator = ScoreCalculator.new([10,1,6])
     score_calculator.create_frames
-    total_score =  score_calculator.get_score_for_frame(0, Frame.new([10]))
+    total_score =  score_calculator.get_score_for_frame(0)
     expect(total_score).to eq(17)
   end
 end 
@@ -210,7 +210,7 @@ RSpec.describe "calculate total of 1 frame" do
   it "calculate total of one frame" do 
     score_calculator = ScoreCalculator.new([10,10,6,7])
     score_calculator.create_frames
-    total_score =  score_calculator.get_score_for_frame(0,Frame.new([10]))
+    total_score =  score_calculator.get_score_for_frame(0)
     expect(total_score).to eq(26)
   end
 end 
