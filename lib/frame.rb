@@ -17,27 +17,26 @@ class Frame
         @scores.sum
     end 
 
-    # TODO: Where should this be? 
+    # TODO: Put this method in the most suitable place --> Where should I put this method? 
     def get_score_for_frame(index,frames)
         frame =frames[index]
+        bonus_score = 0 
         if frame.strike?
           if index == 8
             bonus_score =frames[index+1].scores[0] + frames[index+1].scores[1]
-            total_score = frame.get_scores_sum + bonus_score
-            return  total_score 
           else 
             bonus_score =frames[index+1].strike? ? frames[index+1].get_scores_sum + frames[index+2].scores[0]  : frames[index+1].get_scores_sum 
-            total_score = frame.get_scores_sum + bonus_score
-            return  total_score 
           end 
         elsif frame.spare? 
-          total_score = frame.get_scores_sum + frames[index+1].scores[0]
-          return  total_score
+          bonus_score = frames[index+1].scores[0]
         else
-          total_score = frame.get_scores_sum
-          return  total_score
+          bonus_score = 0 
         end 
+        total = frame.get_scores_sum + bonus_score
+        return total 
     end 
+
+    
 
 
     def to_s
