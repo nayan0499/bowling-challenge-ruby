@@ -17,25 +17,49 @@ class Frame
         @scores.sum
     end 
 
+
+      # Original method 
+      # def get_score_for_frame(index,frames)
+      #   frame =frames[index]
+      #   bonus_score = get_bonus_score(index,frames)
+      #   if frame.strike?
+      #     if index == 8
+      #       bonus_score =frames[index+1].scores[0] + frames[index+1].scores[1]
+      #     else 
+      #       bonus_score =frames[index+1].strike? ? frames[index+1].get_scores_sum + frames[index+2].scores[0]  : frames[index+1].get_scores_sum 
+      #     end 
+      #   elsif frame.spare? 
+      #     bonus_score = frames[index+1].scores[0]
+      #   else
+      #     bonus_score = 0 
+      #   end 
+      #   total = frame.get_scores_sum + bonus_score
+      #   return total 
+      # end 
+
     # TODO: Put this method in the most suitable place --> Where should I put this method? 
     def get_score_for_frame(index,frames)
         frame =frames[index]
-        bonus_score = 0 
-        if frame.strike?
-          if index == 8
-            bonus_score =frames[index+1].scores[0] + frames[index+1].scores[1]
-          else 
-            bonus_score =frames[index+1].strike? ? frames[index+1].get_scores_sum + frames[index+2].scores[0]  : frames[index+1].get_scores_sum 
-          end 
-        elsif frame.spare? 
-          bonus_score = frames[index+1].scores[0]
-        else
-          bonus_score = 0 
-        end 
+        bonus_score = get_bonus_score(index,frames)
         total = frame.get_scores_sum + bonus_score
         return total 
     end 
 
+    def get_bonus_score(index, frames)
+      frame =frames[index]
+      if frame.strike?
+        if index == 8
+          bonus_score =frames[index+1].scores[0] + frames[index+1].scores[1]
+        else 
+          bonus_score =frames[index+1].strike? ? frames[index+1].get_scores_sum + frames[index+2].scores[0]  : frames[index+1].get_scores_sum 
+        end 
+      elsif frame.spare? 
+        bonus_score = frames[index+1].scores[0]
+      else
+        bonus_score = 0 
+      end 
+      return bonus_score
+    end 
     
 
 
