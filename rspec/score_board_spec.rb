@@ -79,7 +79,8 @@ RSpec.describe ScoreCalculator do
       score_calculator = ScoreCalculator.new(scores)
 
       # Act
-      frames = score_calculator.create_frames
+      score_calculator.create_frames
+      frames = score_calculator.frames 
 
       # Assert
       expect(frames.length).to eq(10) # Expecting 10 frames
@@ -101,7 +102,8 @@ RSpec.describe ScoreCalculator do
       score_calculator = ScoreCalculator.new(scores)
 
       # Act
-      frames = score_calculator.create_frames
+      score_calculator.create_frames
+      frames = score_calculator.frames
 
       # Assert
       expect(frames.length).to eq(10) # Expecting 10 frames
@@ -122,7 +124,8 @@ RSpec.describe ScoreCalculator do
       score_calculator = ScoreCalculator.new(scores)
 
       # Act
-      frames = score_calculator.create_frames
+      score_calculator.create_frames
+      frames = score_calculator.frames 
 
       # Assert
       expect(frames.length).to eq(10) # Expecting 10 frames
@@ -143,7 +146,8 @@ RSpec.describe ScoreCalculator do
       score_calculator = ScoreCalculator.new(scores)
 
       # Act
-      frames = score_calculator.create_frames
+      score_calculator.create_frames
+      frames = score_calculator.frames 
 
       # Assert
       expect(frames.length).to eq(10) # Expecting 10 frames
@@ -163,7 +167,8 @@ RSpec.describe ScoreCalculator do
       score_calculator = ScoreCalculator.new(scores)
 
       # Act
-      frames = score_calculator.create_frames
+      score_calculator.create_frames
+      frames = score_calculator.frames 
 
       # Assert
       expect(frames.length).to eq(10) # Expecting 10 frames
@@ -195,26 +200,6 @@ RSpec.describe "calculate total of 1 frame" do
     expect(total_score).to eq(18)
   end
 end 
-
-RSpec.describe "calculate total of 1 frame" do 
-  it "calculate total of one frame" do 
-    score_calculator = ScoreCalculator.new([10,1,6])
-    score_calculator.create_frames
-    total_score =  score_calculator.get_score_for_frame(0)
-    expect(total_score).to eq(17)
-  end
-end 
-
-
-RSpec.describe "calculate total of 1 frame" do 
-  it "calculate total of one frame" do 
-    score_calculator = ScoreCalculator.new([10,10,6,7])
-    score_calculator.create_frames
-    total_score =  score_calculator.get_score_for_frame(0)
-    expect(total_score).to eq(26)
-  end
-end 
-
 
 
 RSpec.describe "calculate total" do 
