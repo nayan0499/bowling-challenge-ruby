@@ -38,7 +38,7 @@ attr_reader :scores, :frames
         frame = BowlingFrame.new(first_roll_pins, second_roll_pins_knocked_down=second_roll_pins,third_roll_pins_knocked_down=third_roll_pins)
         return frame 
     end
-
+    
     def get_roll_count(index)
         if frames.length == 9
             return rolls = scores.length - index 

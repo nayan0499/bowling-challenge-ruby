@@ -16,9 +16,9 @@ class BowlingGame
       score = score_calculator.get_total_score
       p "Your total score is: #{score}"
     end
-  end
+end
   
-  # Instantiate the BowlingGame class and run the game
-  game = BowlingGame.new
-  game.run if __FILE__ == $0
+# Instantiate the BowlingGame class and run the game
+game = BowlingGame.new
+game.run if __FILE__ == $0
   
