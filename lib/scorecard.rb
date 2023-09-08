@@ -22,14 +22,21 @@ attr_reader :scores, :frames
             index += rolls 
         end 
     end
-
-    def create_frame(index,number_of_rolls)
-        first_roll_pins, second_roll_pins = scores[index,number_of_rolls]
+    def get_scores(index, number_of_rolls)
+        first_roll_pins, second_roll_pins, third_roll_pins= scores[index,number_of_rolls]
         if second_roll_pins == nil 
             second_roll_pins = 0
         end
-        frame = BowlingFrame.new(first_roll_pins, second_roll_pins)
-        frame 
+        if third_roll_pins == nil 
+            third_roll_pins = 0
+        end
+        return [first_roll_pins, second_roll_pins, third_roll_pins]
+    end 
+
+    def create_frame(index,number_of_rolls)
+        first_roll_pins, second_roll_pins, third_roll_pins= get_scores(index,number_of_rolls)
+        frame = BowlingFrame.new(first_roll_pins, second_roll_pins_knocked_down=second_roll_pins,third_roll_pins_knocked_down=third_roll_pins)
+        return frame 
     end
 
     def get_roll_count(index)

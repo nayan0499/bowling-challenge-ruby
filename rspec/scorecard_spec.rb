@@ -9,6 +9,26 @@ RSpec.describe "#initialize " do
     end 
 end
 
+RSpec.describe "#get_scores " do 
+    it "get correct first, second, and third pins" do 
+        scorecard_generator = Scorecard.new([10,10,10,10,10,10,10,10,10,10,10,10])
+        scores = scorecard_generator.get_scores(9,3)
+        expect(scores.length).to eq(3)
+        expect(scores).to eq([10,10,10])
+    end 
+end
+
+RSpec.describe "#get_scores " do 
+    it "get correct first, second, and third pins" do 
+        scorecard_generator = Scorecard.new([0,0,0,0,0,0,0,0,0,0])
+        scores = scorecard_generator.get_scores(0,1)
+        expect(scores.length).to eq(3)
+        expect(scores).to eq([0,0,0])
+    end 
+end
+
+
+
 RSpec.describe "#create_frame " do 
     it "creates a frame given the number of rolls" do 
         scorecard_generator = Scorecard.new([1,2])
@@ -30,6 +50,17 @@ RSpec.describe "#create_frame " do
         frame = scorecard_generator.create_frame(2,2)
         expect(frame.first_roll_pins_knocked_down).to eq(3)
         expect(frame.second_roll_pins_knocked_down).to eq(4)
+    end 
+end
+
+RSpec.describe "#create_frame " do 
+    it "creates a frame given the number of rolls when strikes" do 
+        scorecard_generator = Scorecard.new([10,10,10,10,10,10,10,10,10,10,10,10])
+        frame = scorecard_generator.create_frame(9,3)
+        p frame
+        expect(frame.first_roll_pins_knocked_down).to eq(10)
+        expect(frame.second_roll_pins_knocked_down).to eq(10)
+        expect(frame.third_roll_pins_knocked_down).to eq(10)
     end 
 end
 
@@ -78,5 +109,17 @@ RSpec.describe "#generate_frames" do
         expect(frames[8].next_frame).to eq(BowlingFrame.new(10,2,4))
         expect(frames[1].next_frame).to eq(BowlingFrame.new(10, second_roll_pins_knocked_down=0))
         expect(frames[2].next_frame).to eq(BowlingFrame.new(10, second_roll_pins_knocked_down=0))
+    end 
+end
+
+
+RSpec.describe "#generate_frames" do 
+    it "create 10 frames with next_frames populated" do 
+        scorecard_generator = Scorecard.new([10,10,10,10,10,10,10,10,10,10,10,10])
+        scorecard_generator.generate_frames
+        frames = scorecard_generator.frames
+        expect(frames.length).to eq(10)
+        expect(frames[9]).to eq(BowlingFrame.new(10, second_roll_pins_knocked_down = 10, third_roll_pins_knocked_down = 10 ))
+
     end 
 end

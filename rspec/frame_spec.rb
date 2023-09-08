@@ -32,7 +32,8 @@ end
 RSpec.describe "#initialize" do 
     it "returns the next frame when called" do 
         next_frame = BowlingFrame.new(5,6)
-        frame = BowlingFrame.new(10,second_roll_pins_knocked_down=0, next_frame=next_frame)
+        frame = BowlingFrame.new(10,second_roll_pins_knocked_down=0)
+        frame.set_next_frame(next_frame)
         next_frame = frame.next_frame
         expect(next_frame).to eq(BowlingFrame.new(5,6))
         
@@ -99,7 +100,8 @@ end
 RSpec.describe "#get_bonus_score" do 
     it "returns next frame's first roll knocked down pins when it is a spare" do 
         next_frame = BowlingFrame.new(5,6)
-        current_frame = BowlingFrame.new(8,second_roll_pins_knocked_down=2, next_frame=next_frame)
+        current_frame = BowlingFrame.new(8,second_roll_pins_knocked_down=2)
+        current_frame.set_next_frame(next_frame)
         bonus_score= current_frame.get_bonus_score
         expect(bonus_score).to eq(5)
          
@@ -109,7 +111,8 @@ end
 RSpec.describe "#get_bonus_score" do 
     it "returns next frame's total pins knocked down pins when it is a strike" do 
         next_frame = BowlingFrame.new(5,6)
-        current_frame = BowlingFrame.new(10, second_roll_pins_knocked_down= 0,next_frame=next_frame)
+        current_frame = BowlingFrame.new(10, second_roll_pins_knocked_down= 0)
+        current_frame.set_next_frame(next_frame)
         bonus_score= current_frame.get_bonus_score
         expect(bonus_score).to eq(11)
          
@@ -119,9 +122,22 @@ end
 RSpec.describe "#get_bonus_score" do 
     it "returns 10 + next next frame's first roll pins knocked down when the current frame and the next frame are strikes " do 
         next_frame = BowlingFrame.new(5,6)
-        current_frame = BowlingFrame.new(10, second_roll_pins_knocked_down= 0,next_frame=next_frame)
+        current_frame = BowlingFrame.new(10, second_roll_pins_knocked_down= 0)
+        current_frame.set_next_frame(next_frame)
         bonus_score= current_frame.get_bonus_score
         expect(bonus_score).to eq(11)
+         
+    end 
+end
+
+RSpec.describe "#get_bonus_score" do 
+    it "returns 10 + next next frame's first roll pins knocked down when the current frame and the next frame are strikes " do 
+        next_frame = BowlingFrame.new(10, second_roll_pins_knocked_down= 0)
+        current_frame = BowlingFrame.new(10, second_roll_pins_knocked_down= 0)
+        current_frame.set_next_frame(next_frame)
+        next_frame.set_next_frame(BowlingFrame.new(10))
+        bonus_score= current_frame.get_bonus_score
+        expect(bonus_score).to eq(20)
          
     end 
 end
@@ -129,7 +145,8 @@ end
 RSpec.describe "#get_total_score" do 
     it "returns the sum of total pins knocked down and bonus when strike " do 
         next_frame = BowlingFrame.new(5,6)
-        current_frame = BowlingFrame.new(10, second_roll_pins_knocked_down= 0,next_frame=next_frame)
+        current_frame = BowlingFrame.new(10, second_roll_pins_knocked_down= 0)
+        current_frame.set_next_frame(next_frame)
         bonus_score= current_frame.get_total_score
         expect(bonus_score).to eq(21)
          
@@ -139,7 +156,8 @@ end
 RSpec.describe "#get_total_score" do 
     it "returns the sum of total pins knocked down and bonus when spare" do 
         next_frame = BowlingFrame.new(5,6)
-        current_frame = BowlingFrame.new(2, second_roll_pins_knocked_down= 8,next_frame=next_frame)
+        current_frame = BowlingFrame.new(2, second_roll_pins_knocked_down= 8)
+        current_frame.set_next_frame(next_frame)
         bonus_score= current_frame.get_total_score
         expect(bonus_score).to eq(15)
          
@@ -149,9 +167,20 @@ end
 RSpec.describe "#get_total_score" do 
     it "returns the sum of total pins knocked down and bonus when neither spare nor strike" do 
         next_frame = BowlingFrame.new(5,6)
-        current_frame = BowlingFrame.new(2, second_roll_pins_knocked_down= 5,next_frame=next_frame)
+        current_frame = BowlingFrame.new(2, second_roll_pins_knocked_down= 5)
+        current_frame.set_next_frame(next_frame)
+
         bonus_score= current_frame.get_total_score
         expect(bonus_score).to eq(7)
+         
+    end 
+end
+
+RSpec.describe "#strike?" do 
+    it "returns true if first roll pins == 10 " do 
+        
+        current_frame = BowlingFrame.new(10)
+        expect(current_frame.strike?).to eq(true)
          
     end 
 end
