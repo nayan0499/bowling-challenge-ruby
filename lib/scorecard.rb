@@ -1,4 +1,4 @@
-require 'bowling_frame'
+require_relative 'bowling_frame'
 
 class Scorecard
 attr_reader :scores, :frames 
