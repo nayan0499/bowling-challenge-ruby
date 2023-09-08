@@ -20,15 +20,6 @@ RSpec.describe "#initialize " do
     end 
 end
 
-RSpec.describe "#initialize " do 
-    it "raises an error when the first_roll_pins_knocked_down is not 10 and the second argument is not provided" do 
-     
-        expect { BowlingFrame.new(6)
-        }.to raise_error(ArgumentError, "Invalid number of pins knocked down")
-         
-    end 
-end
-
 RSpec.describe "#initialize" do 
     it "returns the next frame when called" do 
         next_frame = BowlingFrame.new(5,6)

@@ -57,3 +57,44 @@ RSpec.describe "#get_total_score " do
         expect(total_score).to eq(300)
     end 
 end
+
+RSpec.describe "#get_total_score " do 
+    it "returns 0 when all gutter balls " do
+        scorecard = Scorecard.new([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
+        scorecard.generate_frames
+        score_calculator = BowlingScoreCalculator.new(scorecard)
+        total_score = score_calculator.get_total_score
+        expect(total_score).to eq(0)
+    end 
+end
+
+RSpec.describe "#get_total_score " do 
+    it "returns 150 when all spares" do
+        scorecard = Scorecard.new([5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5])
+        scorecard.generate_frames
+        score_calculator = BowlingScoreCalculator.new(scorecard)
+        total_score = score_calculator.get_total_score
+        expect(total_score).to eq(150)
+    end 
+end
+
+RSpec.describe "#get_total_score " do 
+    it "returns 200 when alternating strikes and spares" do
+        scorecard = Scorecard.new([5,5,10,5,5,10,5,5,10,5,5,10,5,5,10,5,5])
+        scorecard.generate_frames
+        score_calculator = BowlingScoreCalculator.new(scorecard)
+        total_score = score_calculator.get_total_score
+        expect(total_score).to eq(200)
+    end 
+end
+
+
+RSpec.describe "#get_total_score " do 
+    it "returns the total number of pins knocked down when all open frames" do
+        scorecard = Scorecard.new([1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,3])
+        scorecard.generate_frames
+        score_calculator = BowlingScoreCalculator.new(scorecard)
+        total_score = score_calculator.get_total_score
+        expect(total_score).to eq(28)
+    end 
+end

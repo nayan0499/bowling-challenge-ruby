@@ -123,3 +123,24 @@ RSpec.describe "#generate_frames" do
 
     end 
 end
+
+RSpec.describe "#create_frame" do 
+    it "create a frame with 0 pins knocked" do 
+        scorecard_generator = Scorecard.new([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
+        frame = scorecard_generator.create_frame(0,2)
+        expect(frame).to eq(BowlingFrame.new(0, second_roll_pins_knocked_down=0, third_roll_pins_knocked_down=0))
+
+    end 
+end
+
+
+RSpec.describe "#generate_frames" do 
+    it "create 10 frames with 0 scores" do 
+        scorecard_generator = Scorecard.new([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
+        scorecard_generator.generate_frames
+        frames = scorecard_generator.frames
+        expect(frames.length).to eq(10)
+        expect(frames[9]).to eq(BowlingFrame.new(0, second_roll_pins_knocked_down = 0, third_roll_pins_knocked_down = 0 ))
+
+    end 
+end
